@@ -135,6 +135,20 @@ class PortfolioSiteTests(unittest.TestCase):
                 self.assertIn("mailto:timjgib@gmail.com", source)
                 self.assertIn(linkedin, source)
 
+    def test_google_tag_manager_is_installed_on_every_page(self):
+        container = "GTM-58H5MRH7"
+        for path in [*PAGES.values(), PRODUCTION / "404.html"]:
+            source = path.read_text(encoding="utf-8")
+            with self.subTest(path=path):
+                head = source.split("</head>", 1)[0]
+                self.assertIn("googletagmanager.com/gtm.js", head)
+                self.assertIn(container, head)
+                body = source.split("<body>", 1)[1]
+                self.assertIn(
+                    f"https://www.googletagmanager.com/ns.html?id={container}",
+                    body,
+                )
+
     def test_required_production_files_are_tracked(self):
         required = [
             "production/index.html",
