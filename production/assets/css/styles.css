@@ -265,9 +265,9 @@ ul:last-child {
 }
 
 .site-nav a.nav-cta:hover {
-  color: var(--navy-950);
-  background: var(--blue-050);
-  border-color: var(--blue-050);
+  color: var(--white);
+  background: var(--blue-700);
+  border-color: var(--blue-700);
   box-shadow: var(--shadow-sm);
   transform: translateY(-2px);
 }
