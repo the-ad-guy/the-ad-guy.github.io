@@ -256,8 +256,8 @@ ul:last-child {
   margin-left: 0.35rem;
   padding: 0.5rem 1.05rem;
   color: var(--white);
-  background: var(--blue-700);
-  border: 1px solid var(--blue-700);
+  background: var(--navy-900);
+  border: 1px solid var(--navy-900);
   font-size: 0.9rem;
   font-weight: 800;
   border-radius: 0.55rem;
