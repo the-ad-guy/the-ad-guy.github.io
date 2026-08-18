@@ -6,3 +6,6 @@ __pycache__/
 Thumbs.db
 .idea/
 .vscode/
+
+# Local maintenance helper (contains no secrets, but not part of the site)
+cleanup-deployments.sh
