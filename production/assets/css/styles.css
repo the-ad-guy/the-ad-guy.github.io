@@ -238,6 +238,40 @@ ul:last-child {
   background: var(--blue-050);
 }
 
+/* Divides the site pages from the external / contact links. */
+.site-nav .nav-sep {
+  margin-left: 0.4rem;
+  padding-left: 0.55rem;
+  border-left: 1px solid var(--line);
+}
+
+/* Contact action mirrors the primary hero button, so the header carries the
+   same call-to-action treatment as the page body. Sized a little shorter than
+   .button so it sits comfortably inside the header row. */
+.site-nav a.nav-cta {
+  display: inline-flex;
+  min-height: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0.35rem;
+  padding: 0.5rem 1.05rem;
+  color: var(--white);
+  background: var(--blue-700);
+  border: 1px solid var(--blue-700);
+  font-size: 0.9rem;
+  font-weight: 800;
+  border-radius: 0.55rem;
+  transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+}
+
+.site-nav a.nav-cta:hover {
+  color: var(--navy-950);
+  background: var(--blue-050);
+  border-color: var(--blue-050);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-2px);
+}
+
 .menu-toggle {
   display: none;
   min-width: 2.75rem;
@@ -403,6 +437,10 @@ ul:last-child {
 .project-grid {
   display: grid;
   gap: 1rem;
+}
+
+.metric-grid {
+  grid-template-columns: repeat(2, 1fr);
 }
 
 .metric,
@@ -782,10 +820,6 @@ ul:last-child {
 }
 
 @media (min-width: 42rem) {
-  .metric-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
   .card-grid,
   .project-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -845,7 +879,12 @@ ul:last-child {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 1.1rem 0.9rem;
     text-align: center;
+  }
+
+  .metric span {
+    overflow-wrap: anywhere;
   }
 
   .header-inner {
@@ -868,12 +907,13 @@ ul:last-child {
 
   .js .site-nav {
     position: absolute;
-    top: calc(100% + 0.55rem);
+    top: calc(100% + 0.5rem);
     right: 0;
-    left: 0;
-    width: auto;
+    left: auto;
+    width: 13rem;
+    max-width: calc(100vw - 2rem);
     display: none;
-    padding: 0.55rem;
+    padding: 0.35rem;
     background: var(--white);
     border: 1px solid var(--line);
     border-radius: var(--radius-sm);
@@ -891,7 +931,23 @@ ul:last-child {
   }
 
   .js .site-nav a {
-    padding: 0.75rem 0.85rem;
+    padding: 0.55rem 0.7rem;
+  }
+
+  .js .site-nav .nav-sep {
+    margin: 0.28rem 0 0;
+    padding: 0.28rem 0 0;
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .js .site-nav a.nav-cta {
+    width: 100%;
+    min-height: 2.3rem;
+    margin-left: 0;
+    margin-top: 0.3rem;
+    justify-content: center;
+    text-align: center;
   }
 
   .hero-portrait {
