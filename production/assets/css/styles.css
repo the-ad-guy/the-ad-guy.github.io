@@ -769,6 +769,7 @@ ul:last-child {
 }
 
 .tools-line-plain {
+  color: inherit;
   font-style: normal;
 }
 
