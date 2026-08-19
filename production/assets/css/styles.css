@@ -768,6 +768,10 @@ ul:last-child {
   font-style: italic;
 }
 
+.tools-line-plain {
+  font-style: normal;
+}
+
 .site-footer {
   padding-block: 2.5rem;
   color: #c8d5e1;
