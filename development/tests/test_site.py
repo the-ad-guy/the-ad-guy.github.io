@@ -135,6 +135,16 @@ class PortfolioSiteTests(unittest.TestCase):
                 self.assertIn("mailto:timjgib@gmail.com", source)
                 self.assertIn(linkedin, source)
 
+    def test_marketing_engineering_line_includes_crm_reporting(self):
+        source = (PRODUCTION / "resume" / "index.html").read_text(encoding="utf-8")
+        expected = (
+            "Marketing Engineering:</strong> Google Ads Scripts | Google Ads API | "
+            "Google Apps Script | JavaScript | SQL/BigQuery | Python | HTML/CSS | "
+            "Zapier | CRM Integrations &amp; Reporting (HubSpot, SugarCRM, Odoo, and "
+            "additional platforms)"
+        )
+        self.assertIn(expected, source)
+
     def test_google_tag_manager_is_installed_on_every_page(self):
         container = "GTM-58H5MRH7"
         for path in [*PAGES.values(), PRODUCTION / "404.html"]:

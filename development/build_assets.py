@@ -7,7 +7,7 @@ from PIL import Image, ImageOps
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE_IMAGE = ROOT / "development" / "source-assets" / "adjusted headshot.jpg"
 SOURCE_FAVICON = ROOT / "development" / "source-assets" / "favicon-circle.png"
-SOURCE_PDF = ROOT / "tmp" / "pdfs" / "resume-render" / "Tim Gibson Resume.pdf"
+SOURCE_PDF = ROOT / "development" / "source-assets" / "tim-gibson-resume.pdf"
 IMAGE_OUTPUT = ROOT / "production" / "assets" / "images" / "tim-gibson-headshot.webp"
 PDF_OUTPUT = ROOT / "production" / "assets" / "documents" / "tim-gibson-resume.pdf"
 FAVICON_ICO_OUTPUT = ROOT / "production" / "favicon.ico"
