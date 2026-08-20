@@ -140,7 +140,7 @@ class PortfolioSiteTests(unittest.TestCase):
         expected = (
             "Marketing Engineering:</strong> Google Ads Scripts | Google Ads API | "
             "Google Apps Script | JavaScript | SQL/BigQuery | Python | HTML/CSS | "
-            "Zapier | CRM Integrations &amp; Reporting (HubSpot, SugarCRM, Odoo, and "
+            "Zapier | CRM Integrations &amp; Reporting (HubSpot, Salesforce, Odoo, and "
             "additional platforms)"
         )
         self.assertIn(expected, source)
