@@ -720,10 +720,22 @@ ul:last-child {
   margin: 0;
 }
 
+.experience-header h3 {
+  font-size: 1.1rem;
+}
+
 .experience-header time,
 .education-header time {
   color: var(--navy-900);
   font-weight: 800;
+}
+
+.employer {
+  margin: 0.12rem 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+  font-style: italic;
+  font-weight: 650;
 }
 
 .role {

@@ -145,6 +145,18 @@ class PortfolioSiteTests(unittest.TestCase):
         )
         self.assertIn(expected, source)
 
+    def test_resume_uses_title_first_experience_headers(self):
+        source = (PRODUCTION / "resume" / "index.html").read_text(encoding="utf-8")
+        self.assertIn(
+            '<h3>Senior Paid Media Manager - Analytics &amp; Performance</h3>',
+            source,
+        )
+        self.assertIn('<p class="employer">Vital Design</p>', source)
+        self.assertIn('<h3>Paid Media Specialist</h3>', source)
+        self.assertNotIn('<h3>Vital Design</h3>', source)
+        self.assertNotIn('<h3>AdMachines</h3>', source)
+        self.assertNotIn('<h3>The Dog Nanny</h3>', source)
+
     def test_google_tag_manager_is_installed_on_every_page(self):
         container = "GTM-58H5MRH7"
         for path in [*PAGES.values(), PRODUCTION / "404.html"]:
