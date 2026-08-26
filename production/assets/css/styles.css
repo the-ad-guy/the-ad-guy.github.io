@@ -730,6 +730,17 @@ ul:last-child {
   font-weight: 800;
 }
 
+.education-details {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+}
+
+.education-details p {
+  margin-bottom: 0;
+}
+
 .experience-date-location {
   display: flex;
   flex-direction: column;
@@ -992,7 +1003,8 @@ ul:last-child {
 
   .experience-header,
   .role-header,
-  .education-header {
+  .education-header,
+  .education-details {
     display: grid;
   }
 
