@@ -995,6 +995,33 @@ ul:last-child {
   .education-header {
     display: grid;
   }
+
+  .experience-header {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.1rem;
+  }
+
+  .experience-header > div {
+    display: contents;
+  }
+
+  .experience-header h3 {
+    order: 1;
+  }
+
+  .experience-header time {
+    order: 2;
+    justify-self: start;
+  }
+
+  .experience-header .employer {
+    order: 3;
+  }
+
+  .experience-header .experience-date-location span {
+    order: 4;
+    justify-self: start;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
