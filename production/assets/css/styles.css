@@ -730,6 +730,21 @@ ul:last-child {
   font-weight: 800;
 }
 
+.experience-date-location {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  color: var(--muted);
+  font-size: 0.95rem;
+  font-style: italic;
+  font-weight: 650;
+  line-height: 1.25;
+}
+
+.experience-date-location time {
+  font-style: normal;
+}
+
 .employer {
   margin: 0.12rem 0 0;
   color: var(--muted);
