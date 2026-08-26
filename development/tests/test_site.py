@@ -151,7 +151,11 @@ class PortfolioSiteTests(unittest.TestCase):
             '<h3>Senior Paid Media Manager - Analytics &amp; Performance</h3>',
             source,
         )
-        self.assertIn('<p class="employer">Vital Design</p>', source)
+        self.assertIn(
+            '<h3>Senior Paid Media Manager - Analytics &amp; Performance</h3>\n'
+            '                  <p class="employer">Vital Design</p>',
+            source,
+        )
         self.assertIn('<span>Portsmouth, NH</span>', source)
         self.assertIn('<p class="employer">The Dog Nanny</p>', source)
         self.assertIn('<span>Andover, MA</span>', source)
