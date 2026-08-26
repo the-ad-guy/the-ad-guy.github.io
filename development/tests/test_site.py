@@ -1,6 +1,6 @@
 from html.parser import HTMLParser
 from pathlib import Path
-from urllib.parse import urlparse
+from urllib.parse import unquote, urlparse
 import subprocess
 import unittest
 
@@ -29,9 +29,10 @@ def local_target(url):
     parsed = urlparse(url)
     if parsed.scheme or parsed.netloc or not parsed.path.startswith("/"):
         return None
-    if parsed.path.endswith("/"):
-        return PRODUCTION / parsed.path.lstrip("/") / "index.html"
-    return PRODUCTION / parsed.path.lstrip("/")
+    decoded_path = unquote(parsed.path)
+    if decoded_path.endswith("/"):
+        return PRODUCTION / decoded_path.lstrip("/") / "index.html"
+    return PRODUCTION / decoded_path.lstrip("/")
 
 
 class PortfolioSiteTests(unittest.TestCase):
@@ -41,7 +42,7 @@ class PortfolioSiteTests(unittest.TestCase):
             PRODUCTION / "assets/css/styles.css",
             PRODUCTION / "assets/js/main.js",
             PRODUCTION / "assets/images/tim-gibson-headshot.webp",
-            PRODUCTION / "assets/documents/tim-gibson-resume.pdf",
+            PRODUCTION / "assets/documents/Tim Gibson Resume.pdf",
             PRODUCTION / "favicon.ico",
             PRODUCTION / "assets/images/favicon-32x32.png",
             PRODUCTION / "assets/images/favicon-16x16.png",
@@ -111,7 +112,7 @@ class PortfolioSiteTests(unittest.TestCase):
             "theadguy.org",
         )
         self.assertEqual(
-            (PRODUCTION / "assets/documents/tim-gibson-resume.pdf").read_bytes()[:4],
+            (PRODUCTION / "assets/documents/Tim Gibson Resume.pdf").read_bytes()[:4],
             b"%PDF",
         )
         image = (PRODUCTION / "assets/images/tim-gibson-headshot.webp").read_bytes()
@@ -186,7 +187,7 @@ class PortfolioSiteTests(unittest.TestCase):
             "production/assets/css/styles.css",
             "production/assets/js/main.js",
             "production/assets/images/tim-gibson-headshot.webp",
-            "production/assets/documents/tim-gibson-resume.pdf",
+            "production/assets/documents/Tim Gibson Resume.pdf",
             "production/favicon.ico",
             "production/assets/images/favicon-32x32.png",
             "production/assets/images/favicon-16x16.png",
