@@ -42,6 +42,16 @@ class LaunchpadStructureTest(unittest.TestCase):
             "The removed planning section still interrupts the journey-to-close flow.",
         )
 
+    def test_testimony_is_the_final_section_after_why_launchpad(self):
+        parser = MainSectionParser()
+        parser.feed(PAGE.read_text(encoding="utf-8"))
+
+        self.assertEqual(
+            parser.section_ids[-2:],
+            ["why-launchpad", "testimony"],
+            "The testimony section must close the presentation after Why Launchpad.",
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
