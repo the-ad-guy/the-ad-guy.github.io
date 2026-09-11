@@ -1,9 +1,23 @@
 from html.parser import HTMLParser
 from pathlib import Path
+import re
 import unittest
 
 
 PAGE = Path(__file__).resolve().parents[1] / "production" / "launchpad" / "index.html"
+
+
+def css_declarations(page_text, selector):
+    style = re.search(r"<style>(.*?)</style>", page_text, re.DOTALL).group(1)
+    matches = re.findall(re.escape(selector) + r"{([^}]*)}", style)
+    return [
+        dict(
+            declaration.split(":", 1)
+            for declaration in block.split(";")
+            if ":" in declaration
+        )
+        for block in matches
+    ]
 
 
 class MainSectionParser(HTMLParser):
@@ -76,7 +90,10 @@ class MobileControlsParser(HTMLParser):
     def __init__(self):
         super().__init__()
         self.in_case_select = False
+        self.in_case_option = False
         self.case_options = []
+        self.case_labels = []
+        self.current_case_label = []
         self.stage_items = []
         self.current_stage = None
         self.stage_item_depth = 0
@@ -89,6 +106,8 @@ class MobileControlsParser(HTMLParser):
             self.in_case_select = True
         elif self.in_case_select and tag == "option":
             self.case_options.append(attributes.get("value"))
+            self.in_case_option = True
+            self.current_case_label = []
 
         if tag == "div" and "stage-item" in classes:
             self.current_stage = {"button": None, "panel": None}
@@ -106,12 +125,19 @@ class MobileControlsParser(HTMLParser):
                 self.current_stage["panel"] = attributes.get("data-stage-panel")
 
     def handle_endtag(self, tag):
-        if tag == "select":
+        if tag == "option" and self.in_case_option:
+            self.case_labels.append("".join(self.current_case_label).strip())
+            self.in_case_option = False
+        elif tag == "select":
             self.in_case_select = False
         elif tag == "div" and self.current_stage:
             self.stage_item_depth -= 1
             if self.stage_item_depth == 0:
                 self.current_stage = None
+
+    def handle_data(self, data):
+        if self.in_case_option:
+            self.current_case_label.append(data)
 
 
 class LaunchpadStructureTest(unittest.TestCase):
@@ -184,6 +210,31 @@ class LaunchpadStructureTest(unittest.TestCase):
             [item["button"][1] for item in parser.stage_items],
             ["true", "false", "false", "false", "false"],
         )
+
+    def test_mobile_case_picker_labels_fit_a_narrow_field(self):
+        parser = MobileControlsParser()
+        parser.feed(PAGE.read_text(encoding="utf-8"))
+
+        self.assertEqual(len(parser.case_labels), 9)
+        self.assertLessEqual(max(map(len, parser.case_labels)), 30)
+
+    def test_dropdown_chevron_is_vertically_centered_in_the_field(self):
+        page_text = PAGE.read_text(encoding="utf-8")
+        select = css_declarations(page_text, ".case-select-wrap select")[-1]
+        chevron = css_declarations(page_text, ".case-select-wrap:after")[-1]
+
+        self.assertIn("height", chevron)
+        self.assertIn("bottom", chevron)
+        field_height = int(select["min-height"].removesuffix("px"))
+        chevron_height = int(chevron["height"].removesuffix("px"))
+        chevron_bottom = int(chevron["bottom"].removesuffix("px"))
+        self.assertEqual(chevron_bottom + chevron_height / 2, field_height / 2)
+
+    def test_mobile_accordion_triggers_use_the_full_available_width(self):
+        page_text = PAGE.read_text(encoding="utf-8")
+        mobile_trigger = css_declarations(page_text, ".enhanced .stage-button")[-1]
+
+        self.assertEqual(mobile_trigger.get("width"), "100%")
 
 
 if __name__ == "__main__":
