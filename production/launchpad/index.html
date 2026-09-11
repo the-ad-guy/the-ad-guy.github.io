@@ -31,6 +31,7 @@
 @media(max-width:520px){.hero h1{font-size:clamp(2.05rem,7.55vw,2.8rem)}.hero .eyebrow{font-size:9px;letter-spacing:.11em}.hero-grid{padding-top:40px}.stage-buttons{grid-template-columns:repeat(2,minmax(0,1fr))}.stage-button:last-child{grid-column:1/-1;min-height:90px}.stage-button{min-height:104px}.stage-button strong{font-size:13px}.stage-button small{font-size:11px;min-height:0}.proof-cta{padding:24px}.proof-cta h3{font-size:1.4rem}.plan-button{gap:10px}.plan-panel{padding:25px}.why-reasons{grid-template-columns:1fr}.why h2{font-size:2.2rem}}
 @media(max-width:520px){.reference-grid{grid-template-columns:1fr;gap:16px}.reference-card{padding:24px}}
 @media(max-width:640px){.enhanced .case-controls{display:none}.enhanced .case-select-wrap{display:block;margin-bottom:18px}.enhanced .stage-buttons{display:block}.enhanced .stage-item{display:block}.enhanced .stage-button{display:flex;width:100%;min-height:68px;margin:0 0 8px;padding:13px 16px;flex-direction:row;align-items:center;justify-content:space-between;text-align:left;border-radius:10px}.stage-copy{display:flex;flex-direction:column;align-items:flex-start;gap:3px}.enhanced .stage-button strong{font-size:14px}.enhanced .stage-button small{min-height:0;margin:0;font-size:11px;text-align:left}.stage-toggle{display:grid;place-items:center;flex:0 0 28px;width:28px;height:28px;margin-left:14px;border:1px solid #7d7094;border-radius:50%;font-size:0}.stage-toggle:before{content:"+";font-size:18px;line-height:1}.stage-button[aria-expanded="true"]{margin-bottom:0;border-radius:10px 10px 0 0}.stage-button[aria-expanded="true"] .stage-toggle{border-color:#ffffff55}.stage-button[aria-expanded="true"] .stage-toggle:before{content:"−"}.enhanced .stage-panel{display:grid;grid-column:auto;grid-row:auto;margin:0 0 8px;padding:24px;border-top:0;border-radius:0 0 12px 12px;gap:23px}.enhanced .stage-panel[hidden]{display:none}.bowtie{margin:20px 0}}
+html.enhanced{scroll-behavior:auto}.case-select-wrap:after{content:none}.case-select-control{position:relative;display:block;width:100%;min-height:72px}.case-select-display{display:flex;flex-direction:column;justify-content:center;width:100%;min-height:72px;padding:14px 54px 14px 15px;border:1px solid #dbcef9;border-radius:10px;background:#f0ebfc;color:var(--text);box-shadow:0 6px 18px #17122908}.case-select-display strong{display:block;color:var(--purple);font-size:13px;font-weight:600;line-height:1.4}.case-select-display small{display:block;margin-top:3px;color:var(--muted);font-size:11px;line-height:1.4}.case-select-control select{position:absolute;inset:0;z-index:2;width:100%;height:100%;min-height:72px;opacity:0;cursor:pointer}.case-select-control:after{content:"";position:absolute;right:20px;top:50%;width:8px;height:8px;border-right:1.5px solid var(--purple);border-bottom:1.5px solid var(--purple);transform:translateY(-65%) rotate(45deg);pointer-events:none}.case-select-control:focus-within .case-select-display{outline:3px solid #8f63e633;outline-offset:2px;border-color:var(--purple)}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}}
 @media print{html{scroll-behavior:auto;scroll-padding-top:0}body{background:white;color:#111;font-size:11pt}.wrap{width:100%}.hero,.dark,.toolkit,.why{background:white!important;color:#111!important}.hero:after,.hero-visual,.hero-actions,.hero-note,.section-nav,.stage-button,.case-controls,.case-select-wrap,.plan-controls,.skip-link,.proof-cta .button-link{display:none!important}.hero-grid{display:block;padding:30px 0}.identity{padding-top:0}.hero h1{font-size:34pt}.hero h1 em,.hero-summary,.dark p,.dark h2,.dark h3,.mint{color:#111!important}.section{padding:30px 0;scroll-margin-top:0}.section-head{display:block;margin-bottom:20px}.section-head>p{margin-top:14px}.section-head h2,.why h2{font-size:25pt}.case-layout,.enhanced .case-layout{display:block}.enhanced .stage-buttons{display:block}.enhanced .stage-item{display:block}.enhanced .stage-panel{grid-column:auto;grid-row:auto}.stage-panel[hidden],.case-panel[hidden],.plan-panel[hidden]{display:grid!important}.stage-panel,.case-panel,.plan-panel{break-inside:avoid;page-break-inside:avoid;margin-bottom:25px!important;min-height:0!important}.case-panel{grid-template-columns:1.2fr 1fr}.case-story h3{font-size:20pt}.case-results,.pipeline-step,.proof-cta{background:#f0f0f0;color:#111}.case-metric strong,.case-metric span,.metric-context,.pipeline-step h3,.pipeline-step p,.tool-badges span,.pipeline-step small,.why-reason .number{color:#111}.case-metric{border-color:#ccc}.pipeline{grid-template-columns:repeat(2,1fr)}.tool-badges span{border-color:#bbb}.why{padding:30px 0;min-height:0}.why-reasons{grid-template-columns:repeat(2,1fr)}.why-reason{break-inside:avoid}.proof-stat strong{font-size:24pt}.case-button,.plan-button,.stage-button{display:none!important}a{text-decoration:none}.eyebrow{font-size:9pt}.proof-cta{break-inside:avoid}.proof-cta h3{color:#111}}
 </style>
@@ -62,7 +63,7 @@
 </div></section>
 <section class="section evidence" id="case-studies" aria-labelledby="evidence-title"><div class="wrap">
   <div class="section-head"><div><p class="eyebrow violet">02 / Proven impact</p><h2 id="evidence-title">The work behind<br>the growth.</h2></div><p>Nine examples of connecting acquisition, experience, and data to commercial outcomes. Select a story to see the problem, the work, and the result.</p></div>
-  <label class="case-select-wrap"><span class="case-select-label">Choose a case study</span><select data-case-select aria-label="Choose a case study"><option value="payments">Omnichannel growth</option><option value="ai-saas">Built from zero</option><option value="archiving">Qualification &amp; conversion</option><option value="mobile">Creative &amp; funnel friction</option><option value="commerce">Website &amp; revenue attribution</option><option value="manufacturing">Post-click journey redesign</option><option value="data">SQL &amp; lifecycle reporting</option><option value="organic">Technical SEO &amp; migration</option><option value="integration">Python, APIs &amp; automation</option></select></label>
+  <label class="case-select-wrap"><span class="case-select-label">Choose a case study</span><span class="case-select-control"><span class="case-select-display" aria-hidden="true"><strong data-case-select-title>Omnichannel growth</strong><small data-case-select-descriptor>Enterprise payments</small></span><select data-case-select aria-label="Choose a case study"><option value="payments" data-title="Omnichannel growth" data-descriptor="Enterprise payments">Omnichannel growth — Enterprise payments</option><option value="ai-saas" data-title="Built from zero" data-descriptor="AI document SaaS">Built from zero — AI document SaaS</option><option value="archiving" data-title="Qualification &amp; conversion" data-descriptor="Compliance SaaS">Qualification &amp; conversion — Compliance SaaS</option><option value="mobile" data-title="Creative &amp; funnel friction" data-descriptor="Consumer subscription app">Creative &amp; funnel friction — Consumer subscription app</option><option value="commerce" data-title="Website &amp; revenue attribution" data-descriptor="Luxury custom products">Website &amp; revenue attribution — Luxury custom products</option><option value="manufacturing" data-title="Post-click journey redesign" data-descriptor="B2B OEM manufacturer">Post-click journey redesign — B2B OEM manufacturer</option><option value="data" data-title="SQL &amp; lifecycle reporting" data-descriptor="Higher education">SQL &amp; lifecycle reporting — Higher education</option><option value="organic" data-title="Technical SEO &amp; migration" data-descriptor="Local pet care business">Technical SEO &amp; migration — Local pet care business</option><option value="integration" data-title="Python, APIs &amp; automation" data-descriptor="Custom CRM integration">Python, APIs &amp; automation — Custom CRM integration</option></select></span></label>
   <div class="case-layout"><div class="case-controls" role="group" aria-label="Choose a case study"><button type="button" class="case-button" data-case="payments" aria-pressed="false" aria-controls="case-payments"><span><strong>Omnichannel growth</strong><small>Enterprise payments</small></span><span class="case-arrow" aria-hidden="true">↗</span></button><button type="button" class="case-button" data-case="ai-saas" aria-pressed="false" aria-controls="case-ai-saas"><span><strong>Built from zero</strong><small>AI document SaaS</small></span><span class="case-arrow" aria-hidden="true">↗</span></button><button type="button" class="case-button" data-case="archiving" aria-pressed="false" aria-controls="case-archiving"><span><strong>Qualification & conversion</strong><small>Compliance SaaS</small></span><span class="case-arrow" aria-hidden="true">↗</span></button><button type="button" class="case-button" data-case="mobile" aria-pressed="false" aria-controls="case-mobile"><span><strong>Creative & funnel friction</strong><small>Consumer subscription app</small></span><span class="case-arrow" aria-hidden="true">↗</span></button><button type="button" class="case-button" data-case="commerce" aria-pressed="false" aria-controls="case-commerce"><span><strong>Website & revenue attribution</strong><small>Luxury custom products</small></span><span class="case-arrow" aria-hidden="true">↗</span></button><button type="button" class="case-button" data-case="manufacturing" aria-pressed="false" aria-controls="case-manufacturing"><span><strong>Post-click journey redesign</strong><small>B2B OEM manufacturer</small></span><span class="case-arrow" aria-hidden="true">↗</span></button><button type="button" class="case-button" data-case="data" aria-pressed="false" aria-controls="case-data"><span><strong>SQL & lifecycle reporting</strong><small>Higher education</small></span><span class="case-arrow" aria-hidden="true">↗</span></button><button type="button" class="case-button" data-case="organic" aria-pressed="false" aria-controls="case-organic"><span><strong>Technical SEO & migration</strong><small>Local pet care business</small></span><span class="case-arrow" aria-hidden="true">↗</span></button><button type="button" class="case-button" data-case="integration" aria-pressed="false" aria-controls="case-integration"><span><strong>Python, APIs & automation</strong><small>Custom CRM integration</small></span><span class="case-arrow" aria-hidden="true">↗</span></button></div><div class="case-panels"><article class="case-panel" id="case-payments" data-case-panel="payments" aria-labelledby="case-title-payments">
     <div class="case-story"><p class="eyebrow violet">Omnichannel growth</p><h3 id="case-title-payments">Rebuild confidence. Then earn the right to scale.</h3>
     <p>A B2B payments acquisition program needed to reach decision-makers at the world’s top banks. Low-quality leads and a 0.79x ROAS had led leadership to halve the budget.</p><h4>What I did</h4><ul class="action-list"><li>Built a Google and LinkedIn account-based strategy for the top 200 banks.</li><li>Paired compliance checklists and research with high-intent search, customer-match audiences, email nurture, and remarketing.</li><li>Connected early research engagement to an on-demand demo and downstream revenue.</li></ul></div>
@@ -139,6 +140,8 @@
     const buttons = [...document.querySelectorAll(`[data-${kind}]`)];
     const panels = [...document.querySelectorAll(`[data-${kind}-panel]`)];
     const picker = document.querySelector(`[data-${kind}-select]`);
+    const pickerTitle = picker?.closest('.case-select-wrap')?.querySelector(`[data-${kind}-select-title]`);
+    const pickerDescriptor = picker?.closest('.case-select-wrap')?.querySelector(`[data-${kind}-select-descriptor]`);
     const select = value => {
       if (!panels.some(panel => panel.getAttribute(`data-${kind}-panel`) === value)) return;
       buttons.forEach(button => {
@@ -147,7 +150,12 @@
         if (button.hasAttribute('aria-expanded')) button.setAttribute('aria-expanded', String(active));
       });
       panels.forEach(panel => { panel.hidden = panel.getAttribute(`data-${kind}-panel`) !== value; });
-      if (picker) picker.value = value;
+      if (picker) {
+        picker.value = value;
+        const option = picker.selectedOptions[0];
+        if (pickerTitle) pickerTitle.textContent = option?.dataset.title || option?.textContent || '';
+        if (pickerDescriptor) pickerDescriptor.textContent = option?.dataset.descriptor || '';
+      }
     };
     buttons.forEach(button => {
       button.addEventListener('click', () => select(button.getAttribute(`data-${kind}`)));
@@ -177,6 +185,53 @@
   const sections = links.map(link => document.querySelector(link.getAttribute('href')));
   const scrollBox = nav.querySelector('.nav-inner');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let scrollFrame = 0;
+  const cancelAnchorScroll = () => {
+    if (!scrollFrame) return;
+    cancelAnimationFrame(scrollFrame);
+    scrollFrame = 0;
+  };
+  const scrollToAnchor = (target, hash) => {
+    cancelAnchorScroll();
+    const heading = target.querySelector('.section-head') || target;
+    const navHeight = nav.getBoundingClientRect().height;
+    const startY = window.scrollY;
+    const maxY = document.documentElement.scrollHeight - window.innerHeight;
+    const endY = Math.max(0, Math.min(maxY, startY + heading.getBoundingClientRect().top - navHeight - 24));
+    if (location.hash !== hash) history.pushState(null, '', hash);
+    if (reducedMotion.matches || Math.abs(endY - startY) < 2) {
+      window.scrollTo(0, endY);
+      scheduleNav();
+      return;
+    }
+    const duration = Math.min(800, Math.max(650, Math.abs(endY - startY) * .18));
+    const startedAt = performance.now();
+    const step = now => {
+      const progress = Math.min(1, (now - startedAt) / duration);
+      const eased = progress < .5 ? 4 * progress ** 3 : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+      window.scrollTo(0, startY + (endY - startY) * eased);
+      if (progress < 1) scrollFrame = requestAnimationFrame(step);
+      else {
+        scrollFrame = 0;
+        scheduleNav();
+      }
+    };
+    scrollFrame = requestAnimationFrame(step);
+  };
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    const hash = link.getAttribute('href');
+    const target = hash.length > 1 ? document.querySelector(hash) : null;
+    if (!target) return;
+    link.addEventListener('click', event => {
+      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      event.preventDefault();
+      scrollToAnchor(target, hash);
+    });
+  });
+  ['wheel', 'touchstart'].forEach(type => window.addEventListener(type, cancelAnchorScroll, { passive: true }));
+  window.addEventListener('keydown', event => {
+    if (['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '].includes(event.key)) cancelAnchorScroll();
+  });
   let activeId = '';
   let scheduled = false;
   const updateNav = () => {

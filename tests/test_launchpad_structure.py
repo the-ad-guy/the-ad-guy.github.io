@@ -3,6 +3,8 @@ from pathlib import Path
 import re
 import unittest
 
+from playwright.sync_api import sync_playwright
+
 
 PAGE = Path(__file__).resolve().parents[1] / "production" / "launchpad" / "index.html"
 
@@ -211,24 +213,15 @@ class LaunchpadStructureTest(unittest.TestCase):
             ["true", "false", "false", "false", "false"],
         )
 
-    def test_mobile_case_picker_labels_fit_a_narrow_field(self):
-        parser = MobileControlsParser()
-        parser.feed(PAGE.read_text(encoding="utf-8"))
-
-        self.assertEqual(len(parser.case_labels), 9)
-        self.assertLessEqual(max(map(len, parser.case_labels)), 30)
 
     def test_dropdown_chevron_is_vertically_centered_in_the_field(self):
         page_text = PAGE.read_text(encoding="utf-8")
-        select = css_declarations(page_text, ".case-select-wrap select")[-1]
-        chevron = css_declarations(page_text, ".case-select-wrap:after")[-1]
+        control = css_declarations(page_text, ".case-select-control")[-1]
+        chevron = css_declarations(page_text, ".case-select-control:after")[-1]
 
-        self.assertIn("height", chevron)
-        self.assertIn("bottom", chevron)
-        field_height = int(select["min-height"].removesuffix("px"))
-        chevron_height = int(chevron["height"].removesuffix("px"))
-        chevron_bottom = int(chevron["bottom"].removesuffix("px"))
-        self.assertEqual(chevron_bottom + chevron_height / 2, field_height / 2)
+        self.assertEqual(control.get("min-height"), "72px")
+        self.assertEqual(chevron.get("top"), "50%")
+        self.assertIn("translateY", chevron.get("transform", ""))
 
     def test_mobile_accordion_triggers_use_the_full_available_width(self):
         page_text = PAGE.read_text(encoding="utf-8")
@@ -236,6 +229,69 @@ class LaunchpadStructureTest(unittest.TestCase):
 
         self.assertEqual(mobile_trigger.get("width"), "100%")
 
+class LaunchpadBrowserTest(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.playwright = sync_playwright().start()
+        cls.browser = cls.playwright.chromium.launch(headless=True)
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.browser.close()
+        cls.playwright.stop()
+
+    def test_mobile_case_picker_preserves_and_updates_both_text_lines(self):
+        page = self.browser.new_page(viewport={"width": 390, "height": 844})
+        page.goto(PAGE.as_uri())
+
+        title = page.locator(".case-select-display strong")
+        descriptor = page.locator(".case-select-display small")
+        self.assertEqual(title.count(), 1)
+        self.assertEqual(descriptor.count(), 1)
+        self.assertEqual(title.text_content(), "Omnichannel growth")
+        self.assertEqual(descriptor.text_content(), "Enterprise payments")
+
+        page.locator("[data-case-select]").select_option("integration")
+        self.assertEqual(title.text_content(), "Python, APIs & automation")
+        self.assertEqual(descriptor.text_content(), "Custom CRM integration")
+
+        picker_box = page.locator(".case-select-control").bounding_box()
+        wrap_box = page.locator(".case-select-wrap").bounding_box()
+        self.assertGreaterEqual(picker_box["height"], 70)
+        self.assertAlmostEqual(picker_box["width"], wrap_box["width"], delta=1)
+
+        title_style = title.evaluate(
+            "element => ({fontSize: getComputedStyle(element).fontSize, fontWeight: getComputedStyle(element).fontWeight})"
+        )
+        descriptor_style = descriptor.evaluate(
+            "element => ({fontSize: getComputedStyle(element).fontSize})"
+        )
+        self.assertEqual(title_style, {"fontSize": "13px", "fontWeight": "600"})
+        self.assertEqual(descriptor_style, {"fontSize": "11px"})
+        page.close()
+
+    def test_anchor_scroll_animates_when_css_smooth_scrolling_is_unavailable(self):
+        page = self.browser.new_page(viewport={"width": 1280, "height": 720})
+        page.goto(PAGE.as_uri())
+        page.add_style_tag(content="html{scroll-behavior:auto!important}")
+        destination = page.evaluate(
+            """() => {
+                const nav = document.querySelector('.section-nav');
+                const heading = document.querySelector('#testimony .section-head');
+                return window.scrollY + heading.getBoundingClientRect().top
+                    - nav.getBoundingClientRect().height - 24;
+            }"""
+        )
+
+        page.locator('.section-nav a[href="#testimony"]').click()
+        page.wait_for_timeout(80)
+        intermediate = page.evaluate("window.scrollY")
+        self.assertGreater(intermediate, 0)
+        self.assertLess(intermediate, destination - 50)
+
+        page.wait_for_timeout(900)
+        self.assertAlmostEqual(page.evaluate("window.scrollY"), destination, delta=2)
+        page.close()
 
 if __name__ == "__main__":
     unittest.main()
