@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="500" height="500">
+  <defs>
+    <!-- Clip path to keep the spreadsheet neatly inside the cloud border -->
+    <clipPath id="sheet-clip">
+      <rect x="122" y="255" width="286" height="158" rx="6" />
+    </clipPath>
+    
+    <!-- Clip path extending the full length of the pencil -->
+    <clipPath id="pencil-clip">
+      <path d="M -30 -10 L -30 198 Q -30 220 -8 220 L 8 220 Q 30 220 30 198 L 30 -10 Z" />
+    </clipPath>
+  </defs>
+
+  <!-- 1. CLOUD BACKGROUND (Cubic Béziers offset 7px outside the blue fill coordinates) -->
+  <path d="M 105 413
+           C 48 413, 15 375, 15 320
+           C 15 268, 50 223, 96 223
+           C 100 150, 155 95, 230 95
+           C 278 95, 314 118, 336 154
+           C 392 146, 449 175, 445 232
+           C 474 252, 488 284, 488 320
+           C 488 375, 452 413, 395 413
+           Z" fill="#00a4e8" stroke="#4d4d49" stroke-width="14" stroke-linejoin="round" />
+
+  <!-- 2. SPREADSHEET -->
+  <g clip-path="url(#sheet-clip)">
+    <!-- White Grid Background -->
+    <rect x="122" y="255" width="286" height="158" fill="#e6f0f2" />
+    
+    <!-- Green Header Bar -->
+    <rect x="122" y="255" width="286" height="42" fill="#52b73b" />
+
+    <!-- Vertical Grid Lines (Green) -->
+    <g stroke="#52b73b" stroke-width="10">
+      <line x1="170" y1="297" x2="170" y2="413" />
+      <line x1="217" y1="297" x2="217" y2="413" />
+      <line x1="265" y1="297" x2="265" y2="413" />
+      <line x1="313" y1="297" x2="313" y2="413" />
+      <line x1="360" y1="297" x2="360" y2="413" />
+    </g>
+
+    <!-- Horizontal Grid Lines (Green) -->
+    <g stroke="#52b73b" stroke-width="10">
+      <line x1="122" y1="336" x2="408" y2="336" />
+      <line x1="122" y1="375" x2="408" y2="375" />
+    </g>
+
+    <!-- Header Divider Line (Dark Gray) -->
+    <line x1="122" y1="297" x2="408" y2="297" stroke="#4d4d49" stroke-width="13" />
+  </g>
+
+  <!-- Spreadsheet Outer Border -->
+  <rect x="122" y="255" width="286" height="158" rx="6" fill="none" stroke="#4d4d49" stroke-width="14" stroke-linejoin="round" />
+
+  <!-- 3. PENCIL -->
+  <g transform="translate(297, 271) rotate(-140.5)">
+    
+    <!-- Wood Tip Cone -->
+    <polygon points="-30,0 30,0 0,-60" fill="#dfc39d" />
+    
+    <!-- Graphite Lead Tip -->
+    <polygon points="-12,-36 12,-36 0,-60" fill="#4d4d49" />
+
+    <!-- Clipped Body, Ferrule, and Eraser -->
+    <g clip-path="url(#pencil-clip)">
+      <!-- Yellow/Brown Wood Shaft -->
+      <rect x="-35" y="0" width="70" height="148" fill="#c58b38" />
+      
+      <!-- Pencil Ridges (Vertical Lines) -->
+      <line x1="-10" y1="0" x2="-10" y2="148" stroke="#4d4d49" stroke-width="10" />
+      <line x1="10" y1="0" x2="10" y2="148" stroke="#4d4d49" stroke-width="10" />
+
+      <!-- Metal Ferrule (Silver Band) -->
+      <rect x="-35" y="148" width="70" height="28" fill="#b7b9b2" />
+      <line x1="-35" y1="148" x2="35" y2="148" stroke="#4d4d49" stroke-width="12" />
+      <line x1="-35" y1="176" x2="35" y2="176" stroke="#4d4d49" stroke-width="12" />
+
+      <!-- Pink Eraser -->
+      <rect x="-35" y="176" width="70" height="48" fill="#f39582" />
+    </g>
+
+    <!-- Base Line of the Wood Cone -->
+    <line x1="-30" y1="0" x2="30" y2="0" stroke="#4d4d49" stroke-width="12" stroke-linecap="round" />
+
+    <!-- Pencil Outer Border -->
+    <path d="M 0 -60 
+             L -30 0 
+             L -30 198 
+             Q -30 220 -8 220 
+             L 8 220 
+             Q 30 220 30 198 
+             L 30 0 
+             Z" fill="none" stroke="#4d4d49" stroke-width="14" stroke-linejoin="round" />
+  </g>
+</svg>
