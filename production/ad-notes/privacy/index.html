@@ -46,8 +46,8 @@
         <div class="page-hero-copy">
           <p class="eyebrow">Ad Notes &middot; Chrome extension</p>
           <h1>Privacy policy</h1>
-          <p class="lede">Ad Notes has no servers and no accounts. Everything it touches goes from your browser directly to the Google Sheet you chose. This page explains exactly what it accesses, why, and what it never does.</p>
-          <p class="tools-line">Effective October 21, 2026. Applies to the Ad Notes Chrome extension, item ID nindafjblmbdjhmjkjcmfklcddkkjegj.</p>
+          <p class="lede">Ad Notes has no servers and no accounts. Everything it touches goes from your browser directly to the Google Sheet or Google Doc you chose. This page explains exactly what it accesses, why, and what it never does.</p>
+          <p class="tools-line">Effective November 4, 2026. Applies to the Ad Notes Chrome extension, item ID nindafjblmbdjhmjkjcmfklcddkkjegj, from version 3.9.</p>
           <div class="button-row page-actions">
             <a class="button button-secondary" href="/ad-notes/">Back to Ad Notes</a>
           </div>
@@ -67,9 +67,10 @@
           <div class="resume-section">
             <h2>The short version</h2>
             <ul class="resume-list">
-              <li>Ad Notes writes note rows into one Google Sheet that you choose by pasting its URL.</li>
-              <li>Those writes go straight from your browser to the Google Sheets API. They do not pass through any server operated by me.</li>
-              <li>I never receive, see, collect, or store your Google account data, your spreadsheet contents, or your advertising data.</li>
+              <li>Ad Notes writes your notes into Google Sheets and Google Docs that you pick with Google&rsquo;s own file picker, or that Ad Notes creates for you.</li>
+              <li>It can open only those files. It cannot see, list, or open anything else in your Google Drive.</li>
+              <li>Those writes go straight from your browser to Google&rsquo;s APIs. They do not pass through any server operated by me.</li>
+              <li>I never receive, see, collect, or store your Google account data, your file contents, or your advertising data.</li>
               <li>Nothing is sold, rented, or shared with anyone, and nothing is used for advertising or to train any model.</li>
               <li>You can revoke the extension&rsquo;s access at any time, from inside the extension or from your Google account settings.</li>
             </ul>
@@ -77,39 +78,47 @@
 
           <div class="resume-section">
             <h2>Google user data Ad Notes accesses</h2>
-            <h3>The spreadsheet you designate</h3>
-            <p>When you paste a Google Sheets URL into the extension, Ad Notes reads that spreadsheet&rsquo;s header row to work out which column holds which field, checks that the account you signed in with can edit it, and appends rows as you log notes. It reads a limited range of recent rows to avoid writing the same note twice. It does not list, search, open, modify, or delete any other file in your Google Drive.</p>
+            <h3>The Sheets and Docs you connect</h3>
+            <p>You connect a file by choosing it in Google&rsquo;s file picker, or by letting Ad Notes create a new one. Either way, Google grants the extension access to that one file only. You can connect several files and set rules for which notes each one receives.</p>
+            <p>In a connected spreadsheet, Ad Notes reads the tab names and the header row to work out which column holds which field, reads recent rows so the same note is not written twice, and appends new rows. In a connected document, Ad Notes reads the document&rsquo;s content so it can place each note under the right date and platform heading and skip a note that is already there, then inserts the note. It does not modify or delete anything you wrote yourself, and it never adds content outside the tab you chose for it.</p>
             <h3>Your Google account email address</h3>
-            <p>Ad Notes reads the email address of the Google account you connect. It is written into the User column of your spreadsheet so that teams sharing one sheet can tell who logged which note. It is not transmitted anywhere else.</p>
+            <p>Ad Notes reads the email address of the Google account you sign in with. It is used to record who logged each note, unless you set a display name in the extension, in which case that name is used instead. It is also passed back to Google&rsquo;s file picker so the picker opens on the same account. It is not sent anywhere else.</p>
             <h3>Page content on advertising platforms</h3>
-            <p>On supported advertising platform pages, Ad Notes reads information already displayed on screen, such as the advertising account name and identifier, campaign name, ad group name, and the text of a note you save. On Google Ads it also observes the extension&rsquo;s own capture of notes you create. This reading happens entirely inside your browser. The extension does not run on pages outside the advertising platforms listed in its permissions.</p>
-            <h3>Settings you enter</h3>
-            <p>Your spreadsheet URL and your preferences are stored by Chrome on your own computer using the extension storage API. If you have Chrome profile sync turned on, Chrome may sync those settings between your own devices under Google&rsquo;s terms. I have no access to that storage.</p>
+            <p>On Google Ads, when you save a note, Ad Notes reads Google Ads&rsquo; own response to that save and the account, campaign, ad group, keyword, and ad shown on the page at that moment. When you use the historical export, it reads the notes listed in the Google Ads notes panel. On other advertising platforms, the extension reads the page only after you open the note form on that tab, and only to fill in the account, campaign, ad group, keyword, and ad you have selected. All of this reading happens inside your browser.</p>
+            <h3>What is stored in Chrome</h3>
+            <p>Ad Notes keeps a few things in Chrome&rsquo;s extension storage, on your own computer:</p>
+            <ul class="resume-list">
+              <li><strong>Settings that sync between your devices:</strong> the files you connected and their routing rules, your saved account names and IDs, and your display name. If Chrome sync is turned on, Chrome syncs these between your own devices under Google&rsquo;s terms.</li>
+              <li><strong>Notes waiting to be written:</strong> each note is saved here before Ad Notes tries to write it, and removed once Google confirms the write, so a failed write is retried rather than lost. A waiting note has no expiry: it stays until it is written or you clear the extension&rsquo;s storage.</li>
+              <li><strong>Recently written notes, for duplicate prevention:</strong> for up to the 500 most recent notes, Ad Notes keeps the note text, date, author, account, campaign, and ad group in plain text, so the same note is not written twice. These stay after the notes are written, and older entries are replaced as new notes arrive.</li>
+              <li><strong>Other data kept only on this computer:</strong> the last account you used on each platform, and recent error messages.</li>
+            </ul>
+            <p>Everything except the synced settings stays in this browser profile and is never synced. I have no access to any of this storage.</p>
           </div>
 
           <div class="resume-section">
             <h2>Google API permissions requested</h2>
             <p>Ad Notes asks for the narrowest permissions that allow it to work. You see and approve these on Google&rsquo;s own consent screen before anything is accessed.</p>
             <ul class="resume-list">
-              <li><strong>See, edit, create, and delete all your Google Sheets spreadsheets</strong> (<code>https://www.googleapis.com/auth/spreadsheets</code>). Ad Notes needs write access to a spreadsheet that already exists and that you identify by URL. Google does not offer a narrower permission that can reach an existing spreadsheet chosen this way, so this is the minimum workable scope. In practice Ad Notes only ever reads from and appends to the single spreadsheet you configure.</li>
-              <li><strong>See your primary Google Account email address</strong> (<code>https://www.googleapis.com/auth/userinfo.email</code>). Used solely to fill the User column of your spreadsheet.</li>
+              <li><strong>See, edit, create, and delete only the specific Google Drive files you use with this app</strong> (<code style="overflow-wrap: anywhere;">https://www.googleapis.com/auth/drive.file</code>). This covers only the Sheets and Docs you pick in Google&rsquo;s file picker or that Ad Notes creates. It gives no access to any other file in your Drive. Ad Notes never deletes a file.</li>
+              <li><strong>See your primary Google Account email address</strong> (<code style="overflow-wrap: anywhere;">https://www.googleapis.com/auth/userinfo.email</code>). Used to record who logged each note, as described above.</li>
             </ul>
           </div>
 
           <div class="resume-section">
             <h2>How the information is used</h2>
-            <p>Every piece of information described above is used for one purpose: assembling a note row and appending it to the spreadsheet you chose. There is no secondary use. Specifically, Ad Notes does not use your data for advertising, personalization, profiling, credit assessment, lending, analytics about you, market research, or training or improving any machine learning or artificial intelligence model, whether mine or anyone else&rsquo;s.</p>
+            <p>Every piece of information described above is used for one purpose: recording your notes in the Sheets and Docs you chose. There is no secondary use. Specifically, Ad Notes does not use your data for advertising, personalization, profiling, credit assessment, lending, analytics about you, market research, or training or improving any machine learning or artificial intelligence model, whether mine or anyone else&rsquo;s.</p>
           </div>
 
           <div class="resume-section">
             <h2>Where the information goes</h2>
-            <p>Ad Notes makes network requests to Google only, specifically to Google&rsquo;s authentication endpoints and the Google Sheets API. The data in those requests is your note and the spreadsheet it belongs in. I operate no backend, no database, no logging service, and no analytics in the extension, so there is nowhere for your data to arrive even if I wanted it.</p>
+            <p>Ad Notes makes network requests to Google only: Google&rsquo;s sign-in and file picker, the Google Sheets API and Google Docs API to write your notes, Google&rsquo;s account endpoint to read your email address, and Google&rsquo;s token revocation endpoint when you disconnect. The data in those requests is your note and the file it belongs in. I operate no backend, no database, no logging service, and no analytics in the extension, so there is nowhere for your data to arrive even if I wanted it.</p>
             <p>This website, theadguy.org, uses Google Tag Manager and Google Analytics for ordinary site traffic measurement. That applies to visitors reading this page, and is entirely separate from the extension, which contains no analytics of any kind.</p>
           </div>
 
           <div class="resume-section">
             <h2>Sharing and disclosure</h2>
-            <p>Ad Notes does not transfer your information to any third party. It is not sold, rented, licensed, or shared. The only parties who can see your notes are Google, which hosts the spreadsheet, and the people you have personally shared that spreadsheet with.</p>
+            <p>Ad Notes does not transfer your information to any third party. It is not sold, rented, licensed, or shared. The only parties who can see your notes are Google, which hosts your files, and the people you have personally shared those files with.</p>
           </div>
 
           <div class="resume-section">
@@ -119,22 +128,22 @@
 
           <div class="resume-section">
             <h2>Retention and deletion</h2>
-            <p>I retain nothing, because I receive nothing. The note rows live in your spreadsheet, under your control, and you can edit or delete them there at any time. The extension&rsquo;s settings live on your computer and are removed when you uninstall the extension or clear its storage from the Chrome extensions page.</p>
+            <p>I retain nothing, because I receive nothing. Your notes live in your own Sheets and Docs, under your control, and you can edit or delete them there at any time. A note waiting to be written is removed from Chrome&rsquo;s storage as soon as Google confirms the write. The duplicate-prevention entries are kept for up to the 500 most recent notes, with older ones replaced as new notes arrive. Everything the extension keeps in Chrome is removed when you uninstall it or clear its storage from the Chrome extensions page.</p>
           </div>
 
           <div class="resume-section">
             <h2>Withdrawing access</h2>
-            <p>You can disconnect at any time using the Disconnect button in the extension, which revokes the token and clears the stored credentials. You can also revoke access independently at <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener noreferrer" aria-label="Google account third party apps and services page, opens in a new tab">myaccount.google.com/permissions</a>. Uninstalling the extension removes its local storage. Neither action deletes rows already written to your spreadsheet, since those are your records.</p>
+            <p>You can disconnect at any time using the Disconnect button in the extension, which revokes the extension&rsquo;s access with Google and clears its stored sign-in. You can also revoke access independently at <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener noreferrer" aria-label="Google account third party apps and services page, opens in a new tab">myaccount.google.com/permissions</a>. Uninstalling the extension removes its local storage. Neither action deletes notes already written to your Sheets and Docs, since those are your records.</p>
           </div>
 
           <div class="resume-section">
             <h2>Security</h2>
-            <p>Authentication uses Chrome&rsquo;s built in identity service, which holds the access token in the browser and refreshes it as needed. The extension never sees or stores a refresh token, and there is no client secret embedded in it. All communication with Google uses HTTPS. The extension contains no remotely hosted code, as required by Chrome Manifest V3.</p>
+            <p>Sign-in uses Chrome&rsquo;s built in identity service, which holds the access token in the browser and refreshes it as needed. The extension never sees or stores a refresh token, and there is no client secret embedded in it. All communication with Google uses HTTPS. The extension contains no remotely hosted code, as required by Chrome Manifest V3.</p>
           </div>
 
           <div class="resume-section">
             <h2>Children</h2>
-            <p>Ad Notes is a professional tool for people managing advertising accounts. It is not directed at children and is not intended for anyone under 16.</p>
+            <p>Ad Notes is a professional tool for people managing advertising accounts. It is not directed at children and is not intended for anyone under 18.</p>
           </div>
 
           <div class="resume-section">
